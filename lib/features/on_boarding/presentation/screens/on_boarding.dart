@@ -20,7 +20,25 @@ class _OnBoardingState extends State<OnBoarding> {
           children: [
             PageView(
               children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 345.w,
+                      height: 345.w,
+                      child: Text('Image one'),
+                    ),
 
+                    Text(
+                      'First see learning',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        color: AppColors.appBgBlack,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    )
+                  ],
+                )
               ],
             )
           ],
