@@ -32,7 +32,7 @@ class _OnBoardingState extends State<OnBoarding> {
             if (state is OnboardingCurrentState){
               onboardPageController.animateToPage(
                 state.currentIndex,
-                duration: Duration(milliseconds: 200),
+                duration: Duration(milliseconds: 300),
                 curve: Curves.ease,
               );
             }else if (state is OnboardingCompleteState) {
@@ -76,6 +76,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   ],
                 ),
 
+                /// Dot Indicator & Next Button
                 Positioned(
                   left: 20,
                   right: 20,
