@@ -28,7 +28,7 @@ class Login extends StatelessWidget {
                 Text('Password', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.7).round()))),
                 SizedBox(height: 8),
                 _formTextField(hintText: 'Enter your password', prefixIcon: Icons.lock_outline, isSuffix: true, suffixIcon: Icons.remove_red_eye, obscureText: true),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 
                 TextButton(
                   onPressed: (){},
@@ -39,21 +39,66 @@ class Login extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: AppColors.appBgBlack.withAlpha((255 * 0.5).round()),
                     ),
-                    shape: LinearBorder.bottom(
-                      side: BorderSide(color: Colors.grey),
-                    )
                   ),
                   child: Text('Forgot Password?'),
                 ),
                 SizedBox(height: 40),
 
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      fixedSize: Size(double.infinity, 60),
+                      foregroundColor: AppColors.appBgWhite,
+                      backgroundColor: AppColors.appBgOrange,
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )
+                    ),
+                    child: Text('Login'),
+                  ),
+                ),
+                SizedBox(height: 30),
 
-                ElevatedButton(
-                  onPressed: (){},
-                  child: Text('Login'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        indent: 30,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Or login with',
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.appBgBlack.withAlpha((255 * 0.8).round()),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      flex: 1,
+                      child: Divider(
+                        height: 1,
+                        thickness: 1,
+                        endIndent: 30,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 )
-              
-              
               ],
             ),
           ),
