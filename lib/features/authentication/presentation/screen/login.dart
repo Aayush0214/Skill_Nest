@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
+import 'package:skill_nest/features/authentication/presentation/screen/widgets/social_icon.dart';
+import 'package:skill_nest/features/authentication/presentation/screen/widgets/form_textfield.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -17,17 +20,17 @@ class Login extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Log in', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30.sp, color: AppColors.appBgBlack)),
-                Text('Please enter your details to login.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.5).round()))),
+                Text('Please enter your details to login.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.5).round()))),
                 SizedBox(height: 60),
                 
                 Text('Email', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.7).round()))),
                 SizedBox(height: 8),
-                _formTextField(hintText: 'Enter your email', prefixIcon: Icons.email_outlined, isSuffix: false, obscureText: false),
+                formTextField(hintText: 'Enter your email', prefixIcon: Icons.email_outlined, isSuffix: false, obscureText: false),
                 SizedBox(height: 30),
 
                 Text('Password', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.7).round()))),
                 SizedBox(height: 8),
-                _formTextField(hintText: 'Enter your password', prefixIcon: Icons.lock_outline, isSuffix: true, suffixIcon: Icons.remove_red_eye, obscureText: true),
+                formTextField(hintText: 'Enter your password', prefixIcon: Icons.lock_outline, isSuffix: true, suffixIcon: Icons.remove_red_eye, obscureText: true),
                 SizedBox(height: 10),
                 
                 TextButton(
@@ -64,7 +67,7 @@ class Login extends StatelessWidget {
                     child: Text('Login'),
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 40),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +77,7 @@ class Login extends StatelessWidget {
                       child: Divider(
                         height: 1,
                         thickness: 1,
-                        indent: 30,
+                        indent: 10,
                         color: Colors.grey,
                       ),
                     ),
@@ -93,10 +96,20 @@ class Login extends StatelessWidget {
                       child: Divider(
                         height: 1,
                         thickness: 1,
-                        endIndent: 30,
+                        endIndent: 10,
                         color: Colors.grey,
                       ),
                     ),
+                  ],
+                ),
+
+                SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    socialContainer(ConstantImages.apple),
+                    socialContainer(ConstantImages.google),
+                    socialContainer(ConstantImages.facebook),
                   ],
                 )
               ],
@@ -106,42 +119,4 @@ class Login extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _formTextField({
-  TextEditingController? textController,
-  required String hintText,
-  required IconData prefixIcon,
-  required bool isSuffix,
-  IconData? suffixIcon,
-  required bool obscureText,
-}) {
-  return TextFormField(
-    autocorrect: false,
-    obscureText: obscureText,
-    cursorColor: Colors.black,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    style: TextStyle(fontWeight: FontWeight.w400, color: AppColors.appBgBlack),
-    decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(prefixIcon, color: AppColors.appBgBlack),
-        suffixIcon: isSuffix ? IconButton(
-          onPressed: (){},
-          icon: Icon(suffixIcon, color: Colors.grey),
-        ) : null,
-        hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.grey),
-        )
-    ),
-  );
 }
