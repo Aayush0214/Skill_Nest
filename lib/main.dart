@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.light,
           theme: ThemeData(
-              scaffoldBackgroundColor: AppColors.appBgWhite,
-              appBarTheme: AppBarTheme(backgroundColor: AppColors.appBgWhite)
+              scaffoldBackgroundColor: AppColors.appBgGrey,
+              appBarTheme: AppBarTheme(backgroundColor: AppColors.appBgGrey)
           ),
           home: const OnBoarding(),
         );
