@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
+
+Widget commonButton(String buttonText, VoidCallback onButtonTap) {
+  return SizedBox(
+    width: double.infinity,
+    child: ElevatedButton(
+      onPressed: (){},
+      style: ElevatedButton.styleFrom(
+          elevation: 0,
+          fixedSize: Size(double.infinity, 60),
+          foregroundColor: AppColors.appBgWhite,
+          backgroundColor: AppColors.appBgOrange,
+          textStyle: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          )
+      ),
+      child: Text(buttonText),
+    ),
+  );
+}
