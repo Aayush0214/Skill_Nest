@@ -12,7 +12,7 @@ Widget onboardingDotIndicator(double currentIndex) {
     decorator: DotsDecorator(
       size: const Size.square(10),
       activeSize: const Size(25, 10),
-      activeColor: AppColors.appBgOrange,
+      activeColor: AppColors.primary,
       activeShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),

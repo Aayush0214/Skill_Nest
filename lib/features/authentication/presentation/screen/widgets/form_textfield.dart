@@ -14,27 +14,17 @@ Widget formTextField({
     obscureText: obscureText,
     cursorColor: Colors.black,
     autovalidateMode: AutovalidateMode.onUserInteraction,
-    style: TextStyle(fontWeight: FontWeight.w400, color: AppColors.appBgBlack),
+    style: TextStyle(fontWeight: FontWeight.w400, color: AppColors.black),
     decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(prefixIcon, color: AppColors.appBgBlack),
-        suffixIcon: isSuffix ? IconButton(
-          onPressed: (){},
-          icon: Icon(suffixIcon, color: Colors.grey),
-        ) : null,
-        hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey),
-        )
+      hintText: hintText,
+      prefixIcon: Icon(prefixIcon, color: AppColors.black),
+      suffixIcon:
+          isSuffix
+              ? IconButton(
+                onPressed: () {},
+                icon: Icon(suffixIcon, color: AppColors.black),
+              )
+              : null,
     ),
   );
 }

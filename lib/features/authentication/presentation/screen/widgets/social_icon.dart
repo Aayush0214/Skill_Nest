@@ -11,7 +11,7 @@ Widget socialContainer(String image, VoidCallback onTap) {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColors.appBgWhite,
+          color: AppColors.white,
           boxShadow: [
             BoxShadow(
               blurRadius: 2,

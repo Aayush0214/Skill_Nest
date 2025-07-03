@@ -10,8 +10,8 @@ Widget commonButton(String buttonText, VoidCallback onButtonTap) {
       style: ElevatedButton.styleFrom(
           elevation: 0,
           fixedSize: Size(double.infinity, 60),
-          foregroundColor: AppColors.appBgWhite,
-          backgroundColor: AppColors.appBgOrange,
+          foregroundColor: AppColors.white,
+          backgroundColor: AppColors.primary,
           textStyle: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,

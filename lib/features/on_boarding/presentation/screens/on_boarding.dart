@@ -25,7 +25,7 @@ class _OnBoardingState extends State<OnBoarding> {
     return Scaffold(
       body: Container(
         width: 375.w,
-        color: AppColors.appBgWhite,
+        color: AppColors.white,
         padding: EdgeInsets.symmetric(horizontal: 5),
         child: BlocConsumer<OnboardingBloc, OnboardingState>(
           listener: (blocContext, state) {
@@ -98,8 +98,8 @@ class _OnBoardingState extends State<OnBoarding> {
                           iconSize: 25,
                           fixedSize: Size(60, 60),
                           alignment: Alignment.center,
-                          foregroundColor: AppColors.appBgWhite,
-                          backgroundColor: AppColors.appBgOrange,
+                          foregroundColor: AppColors.white,
+                          backgroundColor: AppColors.primary,
                         ),
                         icon: Icon(Icons.arrow_forward_ios),
                       ),

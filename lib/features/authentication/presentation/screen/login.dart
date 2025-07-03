@@ -1,7 +1,6 @@
-import 'package:flutter/gestures.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/common/widgets/common_button.dart';
@@ -23,28 +22,28 @@ class Login extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Log in', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30.sp, color: AppColors.appBgBlack)),
-                Text('Please enter your details to login.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.5).round()))),
+                Text('Log in', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30.sp, color: AppColors.black)),
+                Text('Please enter your details to login.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.sp, color: AppColors.black)),
                 SizedBox(height: 60),
                 
-                Text('Email', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.7).round()))),
+                Text('Email', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.black)),
                 SizedBox(height: 8),
                 formTextField(hintText: 'Enter your email', prefixIcon: Iconsax.sms, isSuffix: false, obscureText: false),
                 SizedBox(height: 30),
 
-                Text('Password', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.appBgBlack.withAlpha((255 * 0.7).round()))),
+                Text('Password', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.black)),
                 SizedBox(height: 8),
-                formTextField(hintText: 'Enter your password', prefixIcon: Iconsax.lock_1, isSuffix: true, suffixIcon: Icons.remove_red_eye, obscureText: true),
+                formTextField(hintText: 'Enter your password', prefixIcon: Iconsax.lock_1, isSuffix: true, suffixIcon: Iconsax.eye_slash, obscureText: true),
                 SizedBox(height: 10),
                 
                 TextButton(
                   onPressed: (){},
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColors.appBgBlack,
+                    foregroundColor: AppColors.black,
                     textStyle: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.appBgBlack.withAlpha((255 * 0.5).round()),
+                      color: AppColors.black.withAlpha((255 * 0.5).round()),
                     ),
                   ),
                   child: Text('Forgot Password?'),
@@ -71,10 +70,10 @@ class Login extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?", style: TextStyle(fontWeight: FontWeight.normal, color: Colors.grey, fontSize: 14.sp)),
+                    Text("Don't have an account?", style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.black, fontSize: 14.sp)),
                     TextButton(
                       onPressed: (){},
-                      child: Text('SignUp', style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.appBgOrange, fontSize: 15.sp)),
+                      child: Text('SignUp', style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.primary, fontSize: 15.sp)),
                     )
                   ],
                 ),

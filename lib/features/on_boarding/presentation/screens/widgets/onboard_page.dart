@@ -15,9 +15,13 @@ Widget onBoardPage(String title, String subtitle, String onBoardingImage) {
 
       Text(
         title,
+        maxLines: 2,
+        softWrap: true,
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.visible,
         style: TextStyle(
           fontSize: 24.sp,
-          color: AppColors.appBgBlack,
+          color: AppColors.black,
           fontWeight: FontWeight.normal,
         ),
       ),
@@ -25,10 +29,13 @@ Widget onBoardPage(String title, String subtitle, String onBoardingImage) {
 
       Text(
         subtitle,
+        maxLines: 2,
+        softWrap: true,
         textAlign: TextAlign.center,
+        overflow: TextOverflow.visible,
         style: TextStyle(
           fontSize: 14.sp,
-          color: AppColors.appBgBlack,
+          color: AppColors.black,
           fontWeight: FontWeight.normal,
         ),
       ),
