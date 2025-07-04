@@ -6,19 +6,14 @@ Widget commonButton(String buttonText, VoidCallback onButtonTap) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: (){},
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
-          elevation: 0,
-          fixedSize: Size(double.infinity, 60),
-          foregroundColor: AppColors.white,
-          backgroundColor: AppColors.primary,
-          textStyle: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-          ),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15)
-          )
+        elevation: 0,
+        foregroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
+        fixedSize: Size(double.infinity, 45.h),
+        textStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
       child: Text(buttonText),
     ),
