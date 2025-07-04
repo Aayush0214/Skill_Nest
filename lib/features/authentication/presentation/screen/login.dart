@@ -17,24 +17,25 @@ class Login extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 30.h),
                 Text('Log in', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30.sp, color: AppColors.black)),
                 Text('Please enter your details to login.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.sp, color: AppColors.black)),
-                SizedBox(height: 60),
+                SizedBox(height: 30.h),
                 
                 Text('Email', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.black)),
-                SizedBox(height: 8),
+                SizedBox(height: 5.h),
                 formTextField(hintText: 'Enter your email', prefixIcon: Iconsax.sms, isSuffix: false, obscureText: false),
-                SizedBox(height: 30),
+                SizedBox(height: 20.h),
 
                 Text('Password', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, color: AppColors.black)),
-                SizedBox(height: 8),
+                SizedBox(height: 5.h),
                 formTextField(hintText: 'Enter your password', prefixIcon: Iconsax.lock_1, isSuffix: true, suffixIcon: Iconsax.eye_slash, obscureText: true),
-                SizedBox(height: 10),
+                SizedBox(height: 3.h),
                 
                 TextButton(
                   onPressed: (){},
@@ -42,19 +43,18 @@ class Login extends StatelessWidget {
                     foregroundColor: AppColors.black,
                     textStyle: TextStyle(
                       fontSize: 13.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black.withAlpha((255 * 0.5).round()),
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-                  child: Text('Forgot Password?'),
+                  child: Text('Forgot Password ?'),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 20.h),
 
                 commonButton('Login', (){}),
-                SizedBox(height: 40),
+                SizedBox(height: 25.h),
 
                 authDivider(),
-                SizedBox(height: 40),
+                SizedBox(height: 25.h),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -64,7 +64,7 @@ class Login extends StatelessWidget {
                     socialContainer(ConstantImages.facebook, (){}),
                   ],
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 25.h),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

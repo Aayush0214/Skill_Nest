@@ -24,9 +24,8 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: 375.w,
         color: AppColors.white,
-        padding: EdgeInsets.symmetric(horizontal: 5),
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
         child: BlocConsumer<OnboardingBloc, OnboardingState>(
           listener: (blocContext, state) {
             if (state is OnboardingCurrentState){
@@ -78,9 +77,9 @@ class _OnBoardingState extends State<OnBoarding> {
 
                 /// Dot Indicator & Next Button
                 Positioned(
-                  left: 20,
-                  right: 20,
-                  bottom: 50,
+                  left: 20.w,
+                  right: 20.w,
+                  bottom: 50.h,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,8 +94,8 @@ class _OnBoardingState extends State<OnBoarding> {
                         },
                         style: IconButton.styleFrom(
                           elevation: 0,
-                          iconSize: 25,
-                          fixedSize: Size(60, 60),
+                          iconSize: 25.sp,
+                          fixedSize: Size(60.w, 60.w),
                           alignment: Alignment.center,
                           foregroundColor: AppColors.white,
                           backgroundColor: AppColors.primary,
