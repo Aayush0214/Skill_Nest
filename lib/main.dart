@@ -1,3 +1,4 @@
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,9 +7,8 @@ import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/screens/on_boarding.dart';
 
-import 'firebase_options.dart';
-
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
