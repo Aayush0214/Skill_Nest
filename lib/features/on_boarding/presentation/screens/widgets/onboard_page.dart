@@ -29,7 +29,7 @@ Widget onBoardPage(String title, String subtitle, String onBoardingImage) {
 
       Text(
         subtitle,
-        maxLines: 2,
+        maxLines: 3,
         softWrap: true,
         textAlign: TextAlign.center,
         overflow: TextOverflow.visible,
