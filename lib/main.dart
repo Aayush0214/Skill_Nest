@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/screens/on_boarding.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async{
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiBlocProvider(
       providers: [
