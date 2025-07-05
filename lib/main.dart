@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
+import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/screens/on_boarding.dart';
 
@@ -16,6 +17,7 @@ void main() async{
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => OnboardingBloc()),
+        BlocProvider(create: (_) => AuthBloc()),
       ],
       child: const MyApp(),
     ),
