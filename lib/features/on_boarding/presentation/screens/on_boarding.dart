@@ -20,6 +20,13 @@ class _OnBoardingState extends State<OnBoarding> {
   double currentIndex = 0;
   final PageController onboardPageController = PageController();
 
+
+  @override
+  void dispose() {
+    onboardPageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
