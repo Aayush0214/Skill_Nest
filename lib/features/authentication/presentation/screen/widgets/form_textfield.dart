@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 
 Widget formTextField({
-  TextEditingController? textController,
+  required TextEditingController textController,
   required String hintText,
   required IconData prefixIcon,
   required bool isSuffix,
@@ -13,6 +13,7 @@ Widget formTextField({
     autocorrect: false,
     obscureText: obscureText,
     cursorColor: Colors.black,
+    controller: textController,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     style: TextStyle(fontWeight: FontWeight.w400, color: AppColors.black),
     decoration: InputDecoration(
