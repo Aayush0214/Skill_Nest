@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 
-Widget commonButton(String buttonText, VoidCallback onButtonTap) {
+Widget commonButton(VoidCallback onButtonTap, String buttonText) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: onButtonTap,
       style: ElevatedButton.styleFrom(
         elevation: 0,
         foregroundColor: AppColors.white,
