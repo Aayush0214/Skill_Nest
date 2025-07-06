@@ -19,8 +19,8 @@ void showSnackBar({required BuildContext context, required String content, requi
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             color: color.withAlpha(20),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: color.withAlpha(100), width: 2),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: color.withAlpha(100), width: 1),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -31,11 +31,11 @@ void showSnackBar({required BuildContext context, required String content, requi
                 height: 30.w,
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: BorderRadius.circular(25),
+                  shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: Colors.white),
+                child: Icon(icon, color: AppColors.white),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 5.w),
               Text(content, softWrap: true, maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14.sp)),
             ],
           ),
