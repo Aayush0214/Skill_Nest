@@ -8,6 +8,7 @@ Widget formTextField({
   required bool isSuffix,
   IconData? suffixIcon,
   required bool obscureText,
+  VoidCallback? showPassword,
 }) {
   return TextFormField(
     autocorrect: false,
@@ -22,7 +23,7 @@ Widget formTextField({
       suffixIcon:
           isSuffix
               ? IconButton(
-                onPressed: () {},
+                onPressed: showPassword,
                 icon: Icon(suffixIcon, color: AppColors.black),
               )
               : null,
