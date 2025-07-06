@@ -21,15 +21,16 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    bool dontShowPassword = true;
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-
-
 
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthFailureState) {
+          if (state is ShowPasswordState) {
+            dontShowPassword = state.showPassword;
+          } else if (state is AuthFailureState) {
             showSnackBar(context: context, content: state.message, icon: Icons.report_gmailerrorred, color: AppColors.red);
           }
         },
@@ -71,10 +72,10 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: 5.h),
                     formTextField(
-                      hintText: 'Enter your email',
                       isSuffix: false,
                       obscureText: false,
                       prefixIcon: Iconsax.sms,
+                      hintText: 'Enter your email',
                       textController: emailController,
                     ),
                     SizedBox(height: 20.h),
@@ -89,12 +90,13 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: 5.h),
                     formTextField(
-                      hintText: 'Enter your password',
-                      prefixIcon: Iconsax.lock_1,
                       isSuffix: true,
-                      suffixIcon: Iconsax.eye_slash,
-                      obscureText: true,
+                      prefixIcon: Iconsax.lock_1,
+                      obscureText: dontShowPassword,
+                      hintText: 'Enter your password',
                       textController: passwordController,
+                      suffixIcon: dontShowPassword ? Iconsax.eye_slash : Iconsax.eye,
+                      showPassword: () => context.read<AuthBloc>().add(ShowPasswordEvent(showPassword: dontShowPassword)),
                     ),
                     SizedBox(height: 3.h),
 
