@@ -9,9 +9,26 @@ final class ShowPasswordEvent extends AuthEvent {
   ShowPasswordEvent({required this.showPassword});
 }
 
-final class AuthLoginEvent extends AuthEvent {
+final class AuthStateChangedEvent extends AuthEvent {
+  final User? user;
+
+  AuthStateChangedEvent(this.user);
+}
+
+final class LoginWithEmailPasswordEvent extends AuthEvent {
   final String email;
   final String password;
 
-  AuthLoginEvent({required this.email, required this.password});
+  LoginWithEmailPasswordEvent({required this.email, required this.password});
 }
+
+final class SignUpWithEmailPasswordEvent extends AuthEvent {
+  final String email;
+  final String password;
+
+  SignUpWithEmailPasswordEvent({required this.email, required this.password});
+}
+
+final class SignInWithGoogleEvent extends AuthEvent {}
+
+final class SendEmailVerificationEvent extends AuthEvent {}
