@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/error/failure.dart';
 import 'package:skill_nest/core/network/connection_checker.dart';
-import 'package:skill_nest/features/authentication/domain/entity/user.dart';
+import 'package:skill_nest/features/authentication/domain/entity/user_entity.dart';
 import 'package:skill_nest/features/authentication/domain/repository/auth_repository.dart';
 import 'package:skill_nest/features/authentication/data/datasources/auth_remote_datasource.dart';
 
