@@ -7,8 +7,8 @@ import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/common/widgets/common_button.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:skill_nest/features/authentication/presentation/screen/widgets/auth_divider.dart';
 import 'package:skill_nest/features/authentication/presentation/screen/widgets/social_icon.dart';
+import 'package:skill_nest/features/authentication/presentation/screen/widgets/auth_divider.dart';
 import 'package:skill_nest/features/authentication/presentation/screen/widgets/form_textfield.dart';
 
 class Login extends StatefulWidget {
@@ -115,7 +115,7 @@ class _LoginState extends State<Login> {
 
                     commonButton(() {
                       context.read<AuthBloc>().add(
-                        AuthLoginEvent(
+                        LoginWithEmailPasswordEvent(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         ),
