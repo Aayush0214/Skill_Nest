@@ -23,7 +23,7 @@ final class UnauthenticatedState extends AuthState {}
 final class EmailVerifiedState extends AuthState {}
 
 final class EmailNotVerifiedState extends AuthState {
-  final User user;
+  final UserEntity user;
 
   EmailNotVerifiedState({required this.user});
 }

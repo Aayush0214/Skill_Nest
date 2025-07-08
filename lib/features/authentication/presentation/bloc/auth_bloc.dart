@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/usecase/usecase.dart';
 import 'package:skill_nest/features/authentication/domain/entity/user_entity.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/user_auth_state.dart';
-import 'package:skill_nest/features/authentication/domain/usecases/login_with_email_password.dart';
-import 'package:skill_nest/features/authentication/domain/usecases/signup_with_email_password.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/signin_with_google.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/send_email_verification.dart';
+import 'package:skill_nest/features/authentication/domain/usecases/login_with_email_password.dart';
+import 'package:skill_nest/features/authentication/domain/usecases/signup_with_email_password.dart';
 
 part 'auth_event.dart';
 
@@ -69,7 +69,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else {
       if (user.providerData.any((info) => info.providerId == 'password') && !user.emailVerified) {
         // User signed up with email but not verified
-        emit(EmailNotVerifiedState(user: user));
       } else {
         // User is logged in (either via Google or verified email)
         emit(AuthenticatedState(user: user));
@@ -85,7 +84,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       res.fold(
         (failure) => emit(AuthFailureState(message: failure.message)),
-        (success) => emit(AuthSuccessState(user: success)),
+        (user) {
+          if (!user.isEmailVerified) {
+            emit (EmailNotVerifiedState(user: user));
+          } else {
+            emit (AuthSuccessState(user: user));
+          }
+        },
       );
     } else {
       emit(AuthFailureState(message: 'Email & Password is required!!'));
@@ -99,7 +104,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     res.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),
-      (success) => emit(AuthSuccessState(user: success)),
+      (user) {
+        if (!user.isEmailVerified) {
+          emit(EmailNotVerifiedState(user: user));
+        } else {
+          emit(EmailVerifiedState());
+        }
+      },
     );
   }
 
