@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:skill_nest/core/exceptions/firebase_exceptions.dart';
+import 'package:skill_nest/core/exceptions/server_exception.dart';
 import 'package:skill_nest/features/authentication/data/model/user_model.dart';
 
 abstract interface class AuthRemoteDataSource {
@@ -36,8 +37,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else {
         throw Exception('No user found');
       }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
     } catch (e) {
-      throw FirebaseExceptionHandler.handleException(e);
+      throw ServerException(e.toString());
     }
   }
 
@@ -48,10 +51,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (res.user != null) {
         return UserModel.fromFirebase(res.user!);
       } else {
-        throw Exception('SignUp Failed');
+        throw ServerException('SignUp Failed');
       }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
     } catch (e) {
-      throw FirebaseExceptionHandler.handleException(e);
+      throw ServerException(e.toString());
     }
   }
 
@@ -69,22 +74,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         if (userCredential.user != null) {
           return UserModel.fromFirebase(userCredential.user!);
         } else {
-          throw Exception('Something went wrong try another method');
+          throw ServerException('Something went wrong try another method');
         }
       } else {
-        throw Exception('Something went wrong try another method');
+        throw ServerException('Something went wrong try another method');
       }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
     } catch (e) {
-      throw FirebaseExceptionHandler.handleException(e);
+      throw ServerException(e.toString());
     }
   }
 
   @override
   Future<void> sendEmailVerification() async {
     try {
-      await firebaseAuth.currentUser?.sendEmailVerification();
+      if (firebaseAuth.currentUser != null) {
+        await firebaseAuth.currentUser?.sendEmailVerification();
+      } else {
+        throw ServerException('No user signed in.');
+      }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
     } catch (e) {
-      throw FirebaseExceptionHandler.handleException(e);
+      throw ServerException(e.toString());
     }
   }
 }

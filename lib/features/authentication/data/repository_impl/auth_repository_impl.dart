@@ -2,6 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/error/failure.dart';
 import 'package:skill_nest/core/network/connection_checker.dart';
+import 'package:skill_nest/core/exceptions/server_exception.dart';
+import 'package:skill_nest/core/exceptions/firebase_exceptions.dart';
 import 'package:skill_nest/features/authentication/domain/entity/user_entity.dart';
 import 'package:skill_nest/features/authentication/domain/repository/auth_repository.dart';
 import 'package:skill_nest/features/authentication/data/datasources/auth_remote_datasource.dart';
@@ -39,8 +41,8 @@ class AuthRepositoryImpl implements AuthRepository {
       return right(await authRemoteDataSource.sendEmailVerification());
     } on FirebaseAuthException catch (e) {
       return left(Failure(e.message ?? 'Server Issue'));
-    } catch (e) {
-      return left(Failure(e.toString()));
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
     }
   }
 
@@ -49,10 +51,10 @@ class AuthRepositoryImpl implements AuthRepository {
       try {
         final user = await authFunction();
         return Right(user);
-      } on FirebaseAuthException catch (e) {
-        return Left(Failure(e.message ?? 'Server Issue'));
-      } catch (e) {
-        return left(Failure(e.toString()));
+      } on FirebaseAuthExceptionHandler catch (e) {
+        return Left(Failure(e.message));
+      } on ServerException catch (e) {
+        return left(Failure(e.message));
       }
     } else {
       return Left(Failure('No internet connection'));
