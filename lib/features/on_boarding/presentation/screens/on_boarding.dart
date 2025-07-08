@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/constants/constant_strings.dart';
+import 'package:skill_nest/core/services/navigation_service.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/features/authentication/presentation/screen/login.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
@@ -41,18 +42,12 @@ class _OnBoardingState extends State<OnBoarding> {
                 duration: Duration(milliseconds: 300),
                 curve: Curves.ease,
               );
+              currentIndex = state.currentIndex.toDouble();
             }else if (state is OnboardingCompleteState) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => Login()),
-                (route) => false,
-              );
+              NavigationService.pushAndRemoveUntil(context, Login());
             }
           },
           builder: (blocContext, state) {
-            if (state is OnboardingCurrentState) {
-              currentIndex = state.currentIndex.toDouble();
-            }
             return Stack(
               children: [
                 /// Page View
