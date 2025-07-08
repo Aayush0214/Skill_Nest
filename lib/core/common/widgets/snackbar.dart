@@ -13,7 +13,7 @@ void showSnackBar({required BuildContext context, required String content, requi
         backgroundColor: Colors.transparent,
         margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
         content: Container(
-          height: 40.h,
+          height: 50.w,
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
           decoration: BoxDecoration(
@@ -26,17 +26,29 @@ void showSnackBar({required BuildContext context, required String content, requi
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 30.w,
-                height: 30.w,
-                decoration: BoxDecoration(
-                  color: color,
-                  shape: BoxShape.circle,
+              Flexible(
+                flex: 2,
+                child: Container(
+                  width: 30.w,
+                  height: 30.w,
+                  decoration: BoxDecoration(
+                    color: color,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: AppColors.white),
                 ),
-                child: Icon(icon, color: AppColors.white),
               ),
-              SizedBox(width: 5.w),
-              Text(content, softWrap: true, maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14.sp)),
+              SizedBox(width: 10.w),
+              Flexible(
+                flex: 8,
+                child: Text(
+                  content,
+                  maxLines: 3,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: AppColors.black, fontWeight: FontWeight.normal, fontSize: 12.sp),
+                ),
+              ),
             ],
           ),
         ),
