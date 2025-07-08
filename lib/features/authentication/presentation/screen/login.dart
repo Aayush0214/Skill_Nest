@@ -19,12 +19,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool dontShowPassword = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool dontShowPassword = true;
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -32,6 +39,10 @@ class _LoginState extends State<Login> {
             dontShowPassword = state.showPassword;
           } else if (state is AuthFailureState) {
             showSnackBar(context: context, content: state.message, icon: Icons.report_gmailerrorred, color: AppColors.red);
+          } else if (state is EmailNotVerifiedState) {
+
+          } else if (state is AuthSuccessState) {
+
           }
         },
         builder: (context, state) {
