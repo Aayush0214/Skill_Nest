@@ -13,6 +13,7 @@ class SignUpWithEmailPassword implements UseCase<UserEntity, SignupCredentials> 
   Future<Either<Failure, UserEntity>> call(SignupCredentials params) async {
     return await authRepository.signUpWithEmailPassword(
       email: params.email,
+      username: params.username,
       password: params.password,
     );
   }
@@ -20,7 +21,8 @@ class SignUpWithEmailPassword implements UseCase<UserEntity, SignupCredentials> 
 
 class SignupCredentials {
   final String email;
+  final String username;
   final String password;
 
-  SignupCredentials({required this.email, required this.password});
+  SignupCredentials({required this.username, required this.email, required this.password});
 }

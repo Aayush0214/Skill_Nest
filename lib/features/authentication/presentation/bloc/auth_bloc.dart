@@ -100,7 +100,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   /// Signup with email and password
   void _signUpEvent(SignUpWithEmailPasswordEvent event, Emitter<AuthState> emit) async {
     final res = await _signUpUser(
-      SignupCredentials(email: event.email, password: event.password),
+      SignupCredentials(username: event.username, email: event.email, password: event.password),
     );
     res.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),

@@ -24,9 +24,10 @@ final class LoginWithEmailPasswordEvent extends AuthEvent {
 
 final class SignUpWithEmailPasswordEvent extends AuthEvent {
   final String email;
+  final String username;
   final String password;
 
-  SignUpWithEmailPasswordEvent({required this.email, required this.password});
+  SignUpWithEmailPasswordEvent({required this.username, required this.email, required this.password});
 }
 
 final class SignInWithGoogleEvent extends AuthEvent {}

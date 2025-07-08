@@ -23,8 +23,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signUpWithEmailPassword({required String email, required String password}) {
-    return _authenticate(() => authRemoteDataSource.signUpWithEmailPassword(email, password));
+  Future<Either<Failure, UserEntity>> signUpWithEmailPassword({required String username, required String email, required String password}) {
+    return _authenticate(() => authRemoteDataSource.signUpWithEmailPassword(username, email, password));
   }
 
   @override
