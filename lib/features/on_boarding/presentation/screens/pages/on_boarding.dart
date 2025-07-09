@@ -18,13 +18,13 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  double currentIndex = 0;
-  final PageController onboardPageController = PageController();
+  double _currentIndex = 0;
+  final PageController _onboardPageController = PageController();
 
 
   @override
   void dispose() {
-    onboardPageController.dispose();
+    _onboardPageController.dispose();
     super.dispose();
   }
 
@@ -37,12 +37,12 @@ class _OnBoardingState extends State<OnBoarding> {
         child: BlocConsumer<OnboardingBloc, OnboardingState>(
           listener: (blocContext, state) {
             if (state is OnboardingCurrentState){
-              onboardPageController.animateToPage(
+              _onboardPageController.animateToPage(
                 state.currentIndex,
                 duration: Duration(milliseconds: 300),
                 curve: Curves.ease,
               );
-              currentIndex = state.currentIndex.toDouble();
+              _currentIndex = state.currentIndex.toDouble();
             }else if (state is OnboardingCompleteState) {
               NavigationService.pushAndRemoveUntil(context, Login());
             }
@@ -53,7 +53,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 /// Page View
                 PageView(
                   scrollDirection: Axis.horizontal,
-                  controller: onboardPageController,
+                  controller: _onboardPageController,
                   physics: ClampingScrollPhysics(),
                   onPageChanged: (value) {
                     context.read<OnboardingBloc>().add(OnboardingPageSwiped(index: value));
@@ -87,7 +87,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// Dot Indicator
-                      onboardingDotIndicator(currentIndex),
+                      onboardingDotIndicator(_currentIndex),
 
                       /// Next Button
                       IconButton(
