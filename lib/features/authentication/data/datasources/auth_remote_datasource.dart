@@ -33,7 +33,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final res = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       if (res.user != null) {
-        return UserModel.fromFirebase(res.user!);
+        return UserModel.fromFirebase(res.user!).copyWith(
+          isEmailVerified: res.user?.emailVerified,
+        );
       } else {
         throw Exception('No user found');
       }
@@ -49,7 +51,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final res = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       if (res.user != null) {
-        res.user!.updateDisplayName(username);
+        await res.user?.updateDisplayName(username);
         await res.user?.reload(); // Refresh local data
 
         final updatedUser = firebaseAuth.currentUser;
