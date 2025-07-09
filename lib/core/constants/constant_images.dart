@@ -8,4 +8,7 @@ class ConstantImages {
   static String apple = "assets/icons/apple.png";
   static String google = "assets/icons/google.png";
   static String facebook = "assets/icons/facebook.png";
+
+  /// Email Verification
+  static String emailVerificationImage1 = "assets/images/email_verification_1.png";
 }
