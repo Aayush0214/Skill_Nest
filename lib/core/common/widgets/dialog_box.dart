@@ -3,37 +3,43 @@ import 'package:flutter/cupertino.dart';
 
 void showPlatformDialog(BuildContext context, String title, String message) {
   if (Theme.of(context).platform == TargetPlatform.iOS) {
-    showIOSDialog(context, title, message);
+    showIOSDialog(context, title, message, () {});
   } else {
-    showAndroidDialog(context, title, message);
+    showAndroidDialog(context, title, message, (){});
   }
 }
 
-void showIOSDialog(BuildContext context, String title, String message) {
+void showIOSDialog(BuildContext context, String title, String message, void Function()? onTap) {
   showCupertinoDialog(
     context: context,
+    barrierDismissible: false,
     builder: (_) => CupertinoAlertDialog(
       title: Text(title),
       content: Text(message),
       actions: [
         CupertinoDialogAction(
+          onPressed: onTap,
           child: const Text('OK'),
-          onPressed: () => Navigator.pop(context),
         ),
       ],
     ),
   );
 }
 
-void showAndroidDialog(BuildContext context, String title, String message) {
+void showAndroidDialog(BuildContext context, String title, String message, void Function()? onTap) {
   showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: Text(title),
-      content: Text(message),
+      alignment: Alignment.center,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      title: Text(title, textAlign: TextAlign.center),
+      content: Text(message, textAlign: TextAlign.center),
+      contentPadding: EdgeInsets.all(5),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: onTap,
           child: const Text('OK'),
         ),
       ],
