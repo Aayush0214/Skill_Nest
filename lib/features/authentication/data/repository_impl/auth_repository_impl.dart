@@ -39,8 +39,8 @@ class AuthRepositoryImpl implements AuthRepository {
     }
     try {
       return right(await authRemoteDataSource.sendEmailVerification());
-    } on FirebaseAuthException catch (e) {
-      return left(Failure(e.message ?? 'Server Issue'));
+    } on FirebaseAuthExceptionHandler catch (e) {
+      return Left(Failure(e.message));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
