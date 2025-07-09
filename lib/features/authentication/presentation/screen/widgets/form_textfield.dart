@@ -9,16 +9,20 @@ Widget formTextField({
   IconData? suffixIcon,
   required bool obscureText,
   VoidCallback? showPassword,
+  String? Function(String?)? validator,
 }) {
   return TextFormField(
     autocorrect: false,
+    validator: validator,
     obscureText: obscureText,
     cursorColor: Colors.black,
     controller: textController,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     style: TextStyle(fontWeight: FontWeight.w400, color: AppColors.black),
     decoration: InputDecoration(
+      filled: true,
       hintText: hintText,
+      fillColor: AppColors.white,
       prefixIcon: Icon(prefixIcon, color: AppColors.black),
       suffixIcon:
           isSuffix
