@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
+                          "Haven't registered yet?",
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             color: AppColors.black,
@@ -162,7 +162,7 @@ class _LoginState extends State<Login> {
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'SignUp',
+                            'Register',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: AppColors.primary,
