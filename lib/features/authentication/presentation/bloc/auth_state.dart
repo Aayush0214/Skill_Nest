@@ -5,7 +5,7 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
-final class AuthLoading extends AuthState {}
+final class AuthLoadingState extends AuthState {}
 
 final class ShowPasswordState extends AuthState {
   final bool showPassword;
@@ -22,11 +22,7 @@ final class UnauthenticatedState extends AuthState {}
 
 final class EmailVerifiedState extends AuthState {}
 
-final class EmailNotVerifiedState extends AuthState {
-  final UserEntity user;
-
-  EmailNotVerifiedState({required this.user});
-}
+final class EmailNotVerifiedState extends AuthState {}
 
 final class AuthSuccessState extends AuthState {
   final UserEntity user;

@@ -78,6 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   /// Login with email and password
   void _loginEvent(LoginWithEmailPasswordEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
     if (event.email.isNotEmpty && event.password.isNotEmpty) {
       final res = await _loginUser(
         UserCredentials(email: event.email, password: event.password),
@@ -85,8 +86,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       res.fold(
         (failure) => emit(AuthFailureState(message: failure.message)),
         (user) {
+          debugPrint('user email: ${user.email}');
+          debugPrint('username: ${user.username}');
+          debugPrint('email verified: ${user.isEmailVerified}');
+          debugPrint('user id: ${user.uid}');
           if (!user.isEmailVerified) {
-            emit (EmailNotVerifiedState(user: user));
+            emit (EmailNotVerifiedState());
           } else {
             emit (AuthSuccessState(user: user));
           }
@@ -99,14 +104,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   /// Signup with email and password
   void _signUpEvent(SignUpWithEmailPasswordEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
     final res = await _signUpUser(
       SignupCredentials(username: event.username, email: event.email, password: event.password),
     );
     res.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),
       (user) {
+        debugPrint('user email: ${user.email}');
+        debugPrint('username: ${user.username}');
+        debugPrint('email verified: ${user.isEmailVerified}');
+        debugPrint('user id: ${user.uid}');
         if (!user.isEmailVerified) {
-          emit(EmailNotVerifiedState(user: user));
+          emit(EmailNotVerifiedState());
         } else {
           emit(EmailVerifiedState());
         }
@@ -116,6 +126,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   /// Login with google
   void _googleSignInEvent(SignInWithGoogleEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
     final res = await _signInWithGoogle(NoParams());
     res.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),
@@ -125,6 +136,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   /// Send email verification request
   void _sendEmailVerificationRequest(SendEmailVerificationEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
     final res = await _sendEmailVerification(NoParams());
     res.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),
