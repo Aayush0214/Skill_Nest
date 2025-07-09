@@ -5,7 +5,7 @@ class UserModel extends UserEntity {
   const UserModel({
     required super.uid,
     required super.email,
-    required super.userName,
+    required super.username,
     required super.isEmailVerified,
   });
 
@@ -13,8 +13,22 @@ class UserModel extends UserEntity {
     return UserModel(
       uid: user.uid,
       email: user.email ?? '',
-      userName: user.displayName ?? '',
+      username: user.displayName ?? '',
       isEmailVerified: user.emailVerified,
+    );
+  }
+
+  UserModel copyWith({
+    String? uid,
+    String? email,
+    String? username,
+    bool? isEmailVerified,
+  }) {
+    return UserModel(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      username: username ?? this.username,
+      isEmailVerified: isEmailVerified ?? this.isEmailVerified,
     );
   }
 }
