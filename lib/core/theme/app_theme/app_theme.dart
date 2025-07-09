@@ -6,7 +6,7 @@ class AppTheme {
 
   static _border([Color color = AppColors.black]) => OutlineInputBorder(
     borderRadius: BorderRadius.circular(15),
-    borderSide: BorderSide(color: color),
+    borderSide: BorderSide(color: color, width: 0.5),
   );
 
   static ThemeData lightTheme = ThemeData(
