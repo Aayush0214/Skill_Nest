@@ -5,7 +5,7 @@ import 'package:skill_nest/core/common/widgets/snackbar.dart';
 import 'package:skill_nest/core/common/widgets/dialog_box.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/constants/constant_strings.dart';
-import 'package:skill_nest/core/services/navigation_service.dart';
+import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/common/widgets/common_button.dart';
 import 'package:skill_nest/core/common/widgets/loading_dialog.dart';
