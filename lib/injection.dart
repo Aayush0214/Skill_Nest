@@ -14,10 +14,13 @@ import 'package:skill_nest/features/authentication/data/datasources/auth_remote_
 import 'package:skill_nest/features/authentication/domain/usecases/login_with_email_password.dart';
 import 'package:skill_nest/features/authentication/data/repository_impl/auth_repository_impl.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/signup_with_email_password.dart';
+import 'package:skill_nest/core/services/local_storage_service/domain/repository/local_storage.dart';
+import 'package:skill_nest/core/services/local_storage_service/data/repository_impl/local_storage_impl.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
+  sl.registerLazySingleton<LocalStorage>(() => LocalStorageImpl());
   sl.registerLazySingleton(() => GoogleSignIn());
   sl.registerLazySingleton(() => FirebaseAuth.instance);
   sl.registerFactory(() => InternetConnection());
