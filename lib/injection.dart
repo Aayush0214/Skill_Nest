@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'core/network/connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -24,6 +25,7 @@ Future<void> initDependencies() async {
 
   _onBoardingRegistration();
   _authRegistration();
+  _dashboardRegistration();
 }
 
 
@@ -40,4 +42,8 @@ void _authRegistration() {
     ..registerFactory(() => SignInWithGoogle(authRepository: sl()))
     ..registerFactory(() => SendEmailVerification(authRepository: sl()))
     ..registerLazySingleton(() => AuthBloc(authStateChanges: sl(), loginUser: sl(), signInWithGoogle: sl(), signUpUser: sl(), emailVerification: sl()));
+}
+
+void _dashboardRegistration() {
+  sl.registerLazySingleton(() => DashboardBloc());
 }
