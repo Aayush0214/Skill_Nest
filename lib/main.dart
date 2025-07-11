@@ -1,17 +1,17 @@
+import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
+
 import 'injection.dart';
+
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
-import 'features/on_boarding/presentation/screens/pages/on_boarding.dart';
+import 'package:skill_nest/features/splash/presentation/screen/splash.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
-
-
-import 'package:skill_nest/features/dashboard/presentation/pages/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +20,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => sl<SplashBloc>()),
         BlocProvider(create: (_) => sl<OnboardingBloc>()),
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => sl<DashboardBloc>()),
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.light,
           theme: AppTheme.lightTheme,
-          home: Dashboard(),
+          home: SplashScreen(),
         );
       },
     );
