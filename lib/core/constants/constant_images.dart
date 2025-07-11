@@ -1,4 +1,9 @@
 class ConstantImages {
+
+  /// Logo
+  static String appLogo = "assets/images/logo.png";
+  static String splashBg = "assets/images/splash_bg.png";
+
   /// Onboarding
   static String onBoarding1 = "assets/images/on_boarding_1.png";
   static String onBoarding2 = "assets/images/on_boarding_2.png";
