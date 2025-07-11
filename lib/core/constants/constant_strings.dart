@@ -1,5 +1,9 @@
 class ConstantStrings {
 
+  /// ------------- Splash Screen Texts -------------
+  static String appName = "Skill Nest";
+  static String appSlogan = "Empower . Learn . Collaborate";
+
   /// ------------- Onboarding Screen Texts -------------
   static String onBoardTitle1 = "Discover Smarter Learning";
   static String onBoardSubTitle1 = "Leave paper behind and unlock a world of knowledge—all in one place.";
