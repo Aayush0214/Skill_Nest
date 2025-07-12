@@ -1,7 +1,4 @@
-import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
-
 import 'injection.dart';
-
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
 import 'package:skill_nest/features/splash/presentation/screen/splash.dart';
+import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
