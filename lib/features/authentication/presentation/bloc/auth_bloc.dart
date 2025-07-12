@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/usecase/usecase.dart';
 import 'package:skill_nest/features/authentication/domain/entity/user_entity.dart';
-import 'package:skill_nest/features/authentication/domain/usecases/user_auth_state.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/signin_with_google.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/send_email_verification.dart';
 import 'package:skill_nest/features/authentication/domain/usecases/login_with_email_password.dart';
@@ -15,15 +13,12 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final UserAuthState _authStateChanges;
   final LoginWithEmailPassword _loginUser;
   final SignInWithGoogle _signInWithGoogle;
   final SignUpWithEmailPassword _signUpUser;
   final SendEmailVerification _sendEmailVerification;
-  StreamSubscription<User?>? authStateSubscription;
 
   AuthBloc({
-    required UserAuthState authStateChanges,
     required LoginWithEmailPassword loginUser,
     required SignInWithGoogle signInWithGoogle,
     required SignUpWithEmailPassword signUpUser,
@@ -31,15 +26,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   })
     : _loginUser = loginUser,
       _signUpUser = signUpUser,
-      _authStateChanges = authStateChanges,
       _signInWithGoogle = signInWithGoogle,
       _sendEmailVerification = emailVerification,
       super(AuthInitial()) {
-
-    // Listen to Firebase auth state changes right away
-    authStateSubscription = _authStateChanges().listen((user) {
-      add(AuthStateChangedEvent(user));
-    });
 
     on<AuthEvent>((event, emit) {});
 
