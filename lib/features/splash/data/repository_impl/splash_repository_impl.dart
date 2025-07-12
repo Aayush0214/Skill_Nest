@@ -2,6 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/error/failure.dart';
 import 'package:skill_nest/core/network/connection_checker.dart';
+import 'package:skill_nest/core/exceptions/server_exception.dart';
+import 'package:skill_nest/core/exceptions/firebase_exceptions.dart';
 import 'package:skill_nest/features/splash/domain/repository/splash_repository.dart';
 import 'package:skill_nest/features/splash/data/datasources/splash_local_datasource.dart';
 import 'package:skill_nest/features/splash/data/datasources/splash_remote_datasource.dart';
@@ -18,22 +20,22 @@ class SplashRepositoryImpl implements SplashRepository {
   });
 
   @override
-  Stream<User?> userState() async*{
-    yield* remoteDataSource.userAuthStateChange();
+  Stream<Either<Failure, User?>> userState() async* {
+    try {
+      await for (final user in remoteDataSource.userAuthStateChange()) {
+        yield Right(user); // success
+      }
+    } on FirebaseAuthExceptionHandler catch (e) {
+      yield Left(Failure(e.message)); // Firebase error
+    } on ServerException catch (e) {
+      yield Left(Failure(e.message)); // Server error
+    } catch (e) {
+      yield Left(Failure('Unknown error occurred')); // Fallback
+    }
   }
 
-  @override
+    @override
   Future<bool> isOnboardingScreen() async {
     return await localDataSource.isOnboardingScreen();
-  }
-
-  @override
-  Future<Either<Failure, User?>> isUserExist() async {
-    if (await connectionChecker.isConnected) {
-      final user = await remoteDataSource.getCurrentUser();
-      return right(user);
-    } else {
-      return left(Failure('No internet connection'));
-    }
   }
 }

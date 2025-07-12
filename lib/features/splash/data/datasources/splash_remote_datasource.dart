@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:skill_nest/core/exceptions/server_exception.dart';
+import 'package:skill_nest/core/exceptions/firebase_exceptions.dart';
 
 abstract interface class SplashRemoteDataSource {
   Stream<User?> userAuthStateChange();
-  Future<User?> getCurrentUser();
 }
 
 class SplashRemoteDataSourceImpl implements SplashRemoteDataSource {
@@ -13,30 +13,19 @@ class SplashRemoteDataSourceImpl implements SplashRemoteDataSource {
 
   @override
   Stream<User?> userAuthStateChange() async* {
-    await for (final user in firebaseAuth.authStateChanges()) {
-      if (user != null) {
-        try {
-          await user.reload(); // 🛡️ try to reload
+    try {
+      await for (final user in firebaseAuth.authStateChanges()) {
+        if (user != null) {
+          await user.reload();
           yield firebaseAuth.currentUser;
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found') {
-            // 🔄 Sign out the user locally since they were deleted on server
-            await firebaseAuth.signOut();
-            yield null;
-          } else {
-            rethrow; // propagate other exceptions
-          }
+        } else {
+          yield null;
         }
-      } else {
-        yield null;
       }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
-
-
-  @override
-  Future<User?> getCurrentUser() async {
-    return firebaseAuth.currentUser;
-  }
-
 }
