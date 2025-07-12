@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:fpdart/fpdart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:skill_nest/core/error/failure.dart';
 import 'package:skill_nest/features/splash/domain/usecase/check_auth_state.dart';
 import 'package:skill_nest/features/splash/domain/usecase/is_onboarding_screen.dart';
 
@@ -12,7 +14,7 @@ part 'splash_state.dart';
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final CheckAuthStateUsecase _isUserExist;
   final IsOnboardingScreenUsecase _isFirsTimeEntry;
-  StreamSubscription<User?>? authStateSubscription;
+  StreamSubscription<Either<Failure, User?>>? authStateSubscription;
 
   SplashBloc({
     required CheckAuthStateUsecase checkAuthState,
@@ -21,11 +23,16 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
        _isUserExist = checkAuthState,
        super(SplashInitialState()) {
     // Listen to Firebase auth state changes right away
-    authStateSubscription = _isUserExist()
-        .take(1)
-        .listen((user) {
-      debugPrint("stream method called adding data");
-      add(CheckInitialScreenEvent(user: user));
+    authStateSubscription = _isUserExist().listen((either) {
+      either.fold(
+        (failure) {
+          debugPrint(failure.message);
+          add(CheckInitialScreenEvent(user: null, message: failure.message)); // treat as not logged in
+        },
+        (user) {
+          add(CheckInitialScreenEvent(user: user));
+        },
+      );
     });
 
     on<SplashEvent>((event, emit) {});
@@ -33,21 +40,30 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<CheckInitialScreenEvent>(_checkInitialScreen);
   }
 
-  void _checkInitialScreen(CheckInitialScreenEvent event, Emitter<SplashState> emit) async {
+  void _checkInitialScreen(
+    CheckInitialScreenEvent event,
+    Emitter<SplashState> emit,
+  ) async {
     await Future.delayed(Duration(seconds: 2));
     final result = await _isFirsTimeEntry.isOnboarding();
     if (!result) {
-      emit (NavigateToOnboardingState());
-    }
-    if (event.user == null) {
-      debugPrint('user found null');
-      emit(NavigateToLoginState());
-    } else if (!event.user!.emailVerified) {
-      debugPrint('email not verified');
-      emit(NavigateToLoginState());
+      emit(NavigateToOnboardingState());
     } else {
-      debugPrint('dashboard');
-      emit(NavigateToDashboardState());
+      if (event.user == null) {
+        if (event.message != null) {
+          if (event.message!.contains('Network error occurred.')) {
+            emit(NavigateToLoginState(event.message));
+          }
+        } else {
+          emit(NavigateToLoginState());
+        }
+      } else if (!event.user!.emailVerified) {
+        debugPrint('email not verified');
+        emit(NavigateToVerifyEmailState());
+      } else {
+        debugPrint('dashboard');
+        emit(NavigateToDashboardState());
+      }
     }
   }
 
@@ -57,18 +73,3 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     return super.close();
   }
 }
-// final res = await _isUserExist();
-// res.fold(
-// (failure) => emit (NavigateToLoginState(failure.message)),
-// (user){
-// if (user != null) {
-// if (user.emailVerified) {
-// emit (NavigateToDashboardState());
-// } else {
-// emit (NavigateToLoginState());
-// }
-// } else {
-// emit (NavigateToLoginState());
-// }
-// }
-// );

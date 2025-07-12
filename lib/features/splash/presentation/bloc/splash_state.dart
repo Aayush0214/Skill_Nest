@@ -7,6 +7,8 @@ final class SplashInitialState extends SplashState {}
 
 final class NavigateToOnboardingState extends SplashState {}
 
+final class NavigateToVerifyEmailState extends SplashState {}
+
 final class NavigateToDashboardState extends SplashState {}
 
 final class NavigateToLoginState extends SplashState {
