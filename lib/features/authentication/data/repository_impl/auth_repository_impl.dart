@@ -1,5 +1,4 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skill_nest/core/error/failure.dart';
 import 'package:skill_nest/core/network/connection_checker.dart';
 import 'package:skill_nest/core/exceptions/server_exception.dart';
@@ -13,9 +12,6 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
 
   AuthRepositoryImpl({required this.authRemoteDataSource, required this.connectionChecker});
-
-  @override
-  Stream<User?> get authStateChanges => authRemoteDataSource.authStateChanges;
 
   @override
   Future<Either<Failure, UserEntity>> loginWithEmailPassword({required String email, required String password}) async{
@@ -50,14 +46,14 @@ class AuthRepositoryImpl implements AuthRepository {
     if (await connectionChecker.isConnected) {
       try {
         final user = await authFunction();
-        return Right(user);
+        return right(user);
       } on FirebaseAuthExceptionHandler catch (e) {
-        return Left(Failure(e.message));
+        return left(Failure(e.message));
       } on ServerException catch (e) {
         return left(Failure(e.message));
       }
     } else {
-      return Left(Failure('No internet connection'));
+      return left(Failure('No internet connection'));
     }
   }
 
