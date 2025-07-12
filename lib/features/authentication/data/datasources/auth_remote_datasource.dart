@@ -5,8 +5,6 @@ import 'package:skill_nest/core/exceptions/firebase_exceptions.dart';
 import 'package:skill_nest/features/authentication/data/model/user_model.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Stream<User?> get authStateChanges;
-
   Future<UserModel> loginWithEmailPassword(String email, String password);
 
   Future<UserModel> signUpWithEmailPassword(String username, String email, String password);
@@ -24,9 +22,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required this.firebaseAuth,
     required this.googleSignIn,
   });
-
-  @override
-  Stream<User?> get authStateChanges => firebaseAuth.authStateChanges();
 
   @override
   Future<UserModel> loginWithEmailPassword(String email, String password) async {
