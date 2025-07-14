@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   dots_indicator: ^4.0.1
   cupertino_icons: ^1.0.8
+  carousel_slider: ^5.1.1
   flutter_screenutil: ^5.9.3
   shared_preferences: ^2.5.3
   flutter_secure_storage: ^9.2.4
