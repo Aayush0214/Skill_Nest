@@ -1,6 +1,9 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,7 +14,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double _currentCarouselPosition = 0;
   final TextEditingController _searchController = TextEditingController();
+  final List<String> bannerImages = [
+    ConstantImages.banner_1,
+    ConstantImages.banner_2,
+    ConstantImages.banner_3,
+  ];
 
   @override
   void dispose() {
@@ -73,7 +82,72 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Text('Normal ui')
+                SizedBox(height: 10.h),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 140.h,
+                    initialPage: 0,
+                    padEnds: true,
+                    autoPlay: true,
+                    pageSnapping: true,
+                    aspectRatio: 9 / 16,
+                    viewportFraction: 0.9,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  ),
+                  items: bannerImages.map((imageUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(vertical: 3.h),
+                          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(10.h),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                              )
+                            ]
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.h),
+                            child: Image.asset(
+                              imageUrl,
+                              fit: BoxFit.fill,
+                              width: double.infinity,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  ConstantImages.onBoarding1,
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                );
+                              },
+                            )
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                DotsIndicator(
+                  position: _currentCarouselPosition,
+                  dotsCount: bannerImages.length,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  decorator: DotsDecorator(
+                    color: AppColors.grey,
+                    size: Size.square(10),
+                    activeColor: AppColors.primary,
+                    activeSize: Size(20.w, 5.h),
+                    activeShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.h),
+                    )
+                  ),
+                )
               ],
             ),
           ),
