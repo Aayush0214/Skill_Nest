@@ -16,4 +16,9 @@ class ConstantImages {
 
   /// Email Verification
   static String emailVerificationImage1 = "assets/images/email_verification_1.png";
+
+  /// Banners Images
+  static String banner_1 = "assets/images/banner_1.jpg";
+  static String banner_2 = "assets/images/banner_2.jpg";
+  static String banner_3 = "assets/images/banner_3.jpg";
 }
