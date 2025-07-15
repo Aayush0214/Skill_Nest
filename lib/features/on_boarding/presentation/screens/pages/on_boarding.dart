@@ -7,7 +7,7 @@ import 'package:skill_nest/core/services/navigation_service/navigation_service.d
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/features/authentication/presentation/screen/pages/login.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
-import 'package:skill_nest/features/on_boarding/presentation/screens/widgets/dot_indicator.dart';
+import 'package:skill_nest/core/common/widgets/dot_indicator.dart';
 import 'package:skill_nest/features/on_boarding/presentation/screens/widgets/onboard_page.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -87,7 +87,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// Dot Indicator
-                      onboardingDotIndicator(_currentIndex),
+                      dotIndicator(_currentIndex),
 
                       /// Next Button
                       IconButton(
