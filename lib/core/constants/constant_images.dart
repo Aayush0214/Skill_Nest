@@ -21,4 +21,7 @@ class ConstantImages {
   static String banner_1 = "assets/images/banner_1.jpg";
   static String banner_2 = "assets/images/banner_2.jpg";
   static String banner_3 = "assets/images/banner_3.jpg";
+
+  /// Image not found place holder
+  static String placeHolder = "assets/images/image_placeholder.jpg";
 }
