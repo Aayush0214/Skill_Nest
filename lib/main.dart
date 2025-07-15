@@ -1,3 +1,5 @@
+import 'package:skill_nest/features/home/presentation/bloc/home_bloc.dart';
+
 import 'injection.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ void main() async {
         BlocProvider(create: (_) => sl<OnboardingBloc>()),
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => sl<DashboardBloc>()),
+        BlocProvider(create: (_) => HomeBloc()),
       ],
       child: const MyApp(),
     ),
