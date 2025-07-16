@@ -24,4 +24,7 @@ class ConstantImages {
 
   /// Image not found place holder
   static String placeHolder = "assets/images/image_placeholder.jpg";
+
+  /// Dummy Course Image
+  static String course = "assets/images/course_demo.jpg";
 }
