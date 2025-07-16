@@ -2,25 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
-import 'package:skill_nest/core/common/widgets/dot_indicator.dart';
 
-Widget homeSlider({
-  required List<String> bannerImages,
-  required double currentCarouselPosition,
-  dynamic Function(int, CarouselPageChangedReason)? onPageChanged,
-}) {
-  return SliverToBoxAdapter(
-    child: Column(
-      children: [
-        SizedBox(height: 10.h),
-        _slider(bannerImages: bannerImages, onPageChanged: onPageChanged),
-        dotIndicator(currentCarouselPosition, count: bannerImages.length),
-      ],
-    ),
-  );
-}
-
-Widget _slider({
+Widget slider({
   required List<String> bannerImages,
   dynamic Function(int, CarouselPageChangedReason)? onPageChanged,
 }) {
