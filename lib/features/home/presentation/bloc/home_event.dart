@@ -8,3 +8,9 @@ final class BannerChangeEvent extends HomeEvent {
 
   BannerChangeEvent({required this.bannerIndex});
 }
+
+final class FilterChangedEvent extends HomeEvent {
+  final CourseFilterType selectedFilter;
+
+  FilterChangedEvent(this.selectedFilter);
+}

@@ -10,3 +10,10 @@ final class IndicatorState extends HomeState {
 
   IndicatorState({required this.indicatorIndex});
 }
+
+final class FilteredCourseState extends HomeState {
+  final CourseFilterType selectedFilter;
+  final List<Course> filteredCourses;
+
+  FilteredCourseState(this.selectedFilter, this.filteredCourses);
+}
