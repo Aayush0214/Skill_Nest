@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/snackbar.dart';
+import 'package:skill_nest/core/common/widgets/text_button.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/common/widgets/dialog_box.dart';
 import 'package:skill_nest/core/constants/constant_strings.dart';
@@ -144,8 +145,8 @@ class _LoginState extends State<Login> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        socialContainer(ConstantImages.google, () {}),
                         socialContainer(ConstantImages.apple, () {}),
+                        socialContainer(ConstantImages.google, () {}),
                         socialContainer(ConstantImages.facebook, () {}),
                       ],
                     ),
@@ -156,16 +157,10 @@ class _LoginState extends State<Login> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         textFieldHeading(ConstantStrings.notRegisteredText),
-                        TextButton(
+                        commonTextButton(
+                          buttonText: ConstantStrings.registerButtonText,
                           onPressed: () => NavigationService.pushReplacement(context, SignUp()),
-                          child: Text(
-                            ConstantStrings.registerButtonText,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primary,
-                              fontSize: 15.sp,
-                            ),
-                          ),
+                          buttonTextColor: AppColors.primary,
                         ),
                       ],
                     ),
