@@ -1,4 +1,4 @@
-import 'package:skill_nest/features/home/presentation/bloc/home_bloc.dart';
+import 'package:skill_nest/core/services/notification_service/notification_service.dart';
 
 import 'injection.dart';
 import 'firebase_options.dart';
@@ -7,8 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_theme/app_theme.dart';
+import 'package:skill_nest/features/home/presentation/bloc/home_bloc.dart';
 import 'package:skill_nest/features/splash/presentation/screen/splash.dart';
 import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
+import 'package:skill_nest/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/on_boarding/presentation/bloc/onboarding_bloc.dart';
@@ -17,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initDependencies();
+  await NotificationService.instance.initialize();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -24,7 +27,8 @@ void main() async {
         BlocProvider(create: (_) => sl<OnboardingBloc>()),
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => sl<DashboardBloc>()),
-        BlocProvider(create: (_) => HomeBloc()),
+        BlocProvider(create: (_) => sl<HomeBloc>()),
+        BlocProvider(create: (_) => sl<ProfileBloc>()),
       ],
       child: const MyApp(),
     ),
