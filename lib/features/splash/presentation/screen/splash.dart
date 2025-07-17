@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/snackbar.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/constants/constant_strings.dart';
-import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
 import 'package:skill_nest/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
@@ -27,7 +26,7 @@ class SplashScreen extends StatelessWidget {
           NavigationService.pushReplacement(context, VerifyEmail());
         } else if (state is NavigateToLoginState) {
           if (state.message!.isNotEmpty) {
-            showSnackBar(context: context, color: AppColors.red, content: state.message!, icon: Icons.report_gmailerrorred);
+            showSnackBar(context: context, content: state.message!);
           }
           NavigationService.pushReplacement(context, Login());
         }
