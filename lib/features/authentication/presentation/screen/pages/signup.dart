@@ -49,7 +49,7 @@ class _SignUpState extends State<SignUp> {
             LoadingDialog.iOSLoadingDialog(context);
           } else if (state is AuthFailureState) {
             LoadingDialog.hide(context);
-            showSnackBar(context: context, content: state.message, icon: Icons.report_gmailerrorred, color: AppColors.red);
+            showSnackBar(context: context, content: state.message);
           } else if (state is EmailNotVerifiedState) {
             LoadingDialog.hide(context);
             NavigationService.pushAndRemoveUntil(context, VerifyEmail());
@@ -166,7 +166,7 @@ class _SignUpState extends State<SignUp> {
                                 ),
                               );
                             } else {
-                              showSnackBar(context: context, content: 'Confirm password not matched.', icon: Icons.report_gmailerrorred, color: AppColors.red);
+                              showSnackBar(context: context, content: 'Confirm password not matched.');
                             }
                           }
                         },

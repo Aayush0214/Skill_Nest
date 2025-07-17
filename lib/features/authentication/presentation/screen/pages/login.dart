@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
             LoadingDialog.iOSLoadingDialog(context);
           } else if (state is AuthFailureState) {
             LoadingDialog.hide(context);
-            showSnackBar(context: context, color: AppColors.red, content: state.message, icon: Icons.report_gmailerrorred);
+            showSnackBar(context: context, content: state.message);
           } else if (state is EmailNotVerifiedState) {
             LoadingDialog.hide(context);
             showIOSDialog(
