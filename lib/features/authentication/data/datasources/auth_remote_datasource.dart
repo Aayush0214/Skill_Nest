@@ -12,6 +12,8 @@ abstract interface class AuthRemoteDataSource {
   Future<UserModel> signInWithGoogle();
 
   Future<void> sendEmailVerification();
+
+  Future<bool> logout();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -95,6 +97,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else {
         throw ServerException('No user signed in.');
       }
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionHandler.fromCode(e.code);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> logout() async {
+    try {
+      await firebaseAuth.signOut();
+      if (await googleSignIn.isSignedIn()) {
+        await googleSignIn.signOut();
+      }
+      return true;
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionHandler.fromCode(e.code);
     } catch (e) {

@@ -18,4 +18,6 @@ abstract interface class AuthRepository {
   Future<Either<Failure, UserEntity>> signInWithGoogle();
 
   Future<Either<Failure, void>> sendEmailVerification();
+
+  Future<Either<Failure, bool>> logout();
 }

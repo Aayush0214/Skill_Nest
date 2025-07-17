@@ -42,6 +42,20 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, bool>> logout() async{
+    if (!await connectionChecker.isConnected) {
+      return left(Failure('No internet connection'));
+    }
+    try {
+      return right(await authRemoteDataSource.logout());
+    } on FirebaseAuthExceptionHandler catch (e) {
+      return Left(Failure(e.message));
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
   Future<Either<Failure, UserEntity>> _authenticate(Future<UserEntity> Function() authFunction) async {
     if (await connectionChecker.isConnected) {
       try {
@@ -56,5 +70,6 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure('No internet connection'));
     }
   }
+
 
 }
