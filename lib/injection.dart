@@ -4,7 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'features/splash/domain/usecase/is_onboarding_screen.dart';
+import 'package:skill_nest/features/home/presentation/bloc/home_bloc.dart';
 import 'package:skill_nest/features/splash/presentation/bloc/splash_bloc.dart';
+import 'package:skill_nest/features/authentication/domain/usecases/logout.dart';
+import 'package:skill_nest/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:skill_nest/features/splash/domain/usecase/check_auth_state.dart';
 import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/authentication/presentation/bloc/auth_bloc.dart';
@@ -41,6 +44,8 @@ Future<void> initDependencies() async {
   _onBoardingRegistration();
   _authRegistration();
   _dashboardRegistration();
+  _homeRegistration();
+  _profileRegistration();
 }
 
 void _splashRegistration() {
@@ -65,9 +70,19 @@ void _authRegistration() {
     ..registerFactory(() => SignUpWithEmailPassword(authRepository: sl()))
     ..registerFactory(() => SignInWithGoogle(authRepository: sl()))
     ..registerFactory(() => SendEmailVerification(authRepository: sl()))
+    ..registerFactory(() => LogoutUseCase(authRepository: sl()))
     ..registerLazySingleton(() => AuthBloc(loginUser: sl(), signInWithGoogle: sl(), signUpUser: sl(), emailVerification: sl()));
 }
 
 void _dashboardRegistration() {
   sl.registerLazySingleton(() => DashboardBloc());
+}
+
+void _homeRegistration() {
+  sl.registerLazySingleton(() => HomeBloc());
+}
+
+
+void _profileRegistration() {
+  sl.registerLazySingleton(() => ProfileBloc(logoutUserUseCase: sl()));
 }
