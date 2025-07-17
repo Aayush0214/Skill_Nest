@@ -16,6 +16,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -31,6 +32,7 @@ android {
         targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -44,4 +46,24 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // ✅ Required for Java 8+ APIs support (flutter_local_notifications needs it)
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+
+    // ✅ MultiDex (for handling >65k methods)
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    // ✅ Firebase BOM (manages all Firebase versions)
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // ✅ Firebase Authentication
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // ✅ Firebase Cloud Messaging (FCM)
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
+    // ✅ Optional: Firebase Analytics
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
