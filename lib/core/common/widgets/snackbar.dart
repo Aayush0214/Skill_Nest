@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 
-void showSnackBar({required BuildContext context, required String content, required IconData icon, required Color color}) {
+void showSnackBar({required BuildContext context, required String content, IconData? icon = Icons.report_gmailerrorred, Color? color = AppColors.red}) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
@@ -18,7 +18,7 @@ void showSnackBar({required BuildContext context, required String content, requi
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: color.withAlpha(20),
+            color: color!.withAlpha(20),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: color.withAlpha(100), width: 1),
           ),
