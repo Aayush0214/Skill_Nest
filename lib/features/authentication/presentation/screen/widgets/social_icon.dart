@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 
 Widget socialContainer(String image, VoidCallback onTap) {
-  return GestureDetector(
+  return InkWell(
     onTap: onTap,
+    splashColor: AppColors.grey,
     child: Container(
       width: 45.w,
       height: 45.w,
