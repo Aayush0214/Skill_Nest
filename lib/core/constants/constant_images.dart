@@ -27,4 +27,7 @@ class ConstantImages {
 
   /// Dummy Course Image
   static String course = "assets/images/course_demo.jpg";
+
+  /// Dummy Profile Image
+  static String profileImage = "https://randomuser.me/api/portraits/men/1.jpg";
 }
