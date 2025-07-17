@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: homeHeader(
                 userName: 'Aayush',
                 searchController: _searchController,
-                userProfileImage: 'https://randomuser.me/api/portraits/men/1.jpg',
+                userProfileImage: ConstantImages.profileImage,
               ),
           ),
 
