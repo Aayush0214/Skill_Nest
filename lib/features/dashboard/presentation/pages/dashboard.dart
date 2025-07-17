@@ -2,8 +2,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
-import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/home/presentation/screen/home_screen.dart';
+import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:skill_nest/features/profile/presentation/screen/pages/profile_page.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
@@ -28,12 +29,7 @@ class Dashboard extends StatelessWidget {
         child: Text('Chat'),
       ),
     ),
-    Container(
-      color: AppColors.white,
-      child: Center(
-        child: Text('Profile'),
-      ),
-    ),
+    ProfilePage(),
   ];
 
   @override
