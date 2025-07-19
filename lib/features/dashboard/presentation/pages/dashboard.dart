@@ -5,18 +5,14 @@ import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/features/home/presentation/screen/home_screen.dart';
 import 'package:skill_nest/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:skill_nest/features/profile/presentation/screen/pages/profile_page.dart';
+import 'package:skill_nest/features/search/presentation/screen/search.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
 
   final List<Widget> _screens = [
     HomeScreen(),
-    Container(
-      color: AppColors.white,
-      child: Center(
-        child: Text('Search'),
-      ),
-    ),
+    SearchScreen(),
     Container(
       color: AppColors.white,
       child: Center(
