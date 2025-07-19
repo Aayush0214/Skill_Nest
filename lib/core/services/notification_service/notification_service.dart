@@ -25,7 +25,7 @@ class NotificationService {
     await setupFlutterNotifications(); // Ensure channel setup
     await _setupMessageHandlers();
     await getDeviceToken();
-
+    subscribeToTopic('all_devices');
     // iOS: Show notifications in foreground
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
@@ -77,10 +77,12 @@ class NotificationService {
       iOS: initializationSettingsDarwin,
     );
 
-    await _localNotification.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (details) {
-          debugPrint('Notification Clicked: ${details.payload}');
-        });
+    await _localNotification.initialize(initializationSettings, onDidReceiveNotificationResponse: (details) {
+      if (details.payload == 'chat') {
+        
+      }
+      debugPrint('Notification Clicked: ${details.payload}');
+    });
 
     _isFlutterLocalNotificationsInitialized = true;
   }
@@ -139,10 +141,16 @@ class NotificationService {
     }
   }
 
+  /// Handle background messages
   void _handleBackgroundMessage(RemoteMessage message) {
     if (message.data['type'] == 'chat') {
       debugPrint('Navigate to chat screen with data: ${message.data}');
     }
+  }
+
+  Future<void> subscribeToTopic(String topic) async {
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+    debugPrint('Subscribed topic: $topic');
   }
 
   Future<String?> getDeviceToken() async {
