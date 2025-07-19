@@ -42,6 +42,7 @@ dependencies:
   carousel_slider: ^5.1.1
   flutter_screenutil: ^5.9.3
   shared_preferences: ^2.5.3
+  flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.2.4
   internet_connection_checker_plus: ^2.7.2
 
