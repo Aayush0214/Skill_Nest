@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:skill_nest/core/common/widgets/search_box.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
+import 'package:skill_nest/core/common/widgets/search_and_filter.dart';
 
 Widget homeHeader({required String userName, required String userProfileImage, required TextEditingController searchController}) {
   return SliverAppBar(
@@ -45,37 +44,7 @@ Widget homeHeader({required String userName, required String userProfileImage, r
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 10,
-                  fit: FlexFit.tight,
-                  child: searchBox(searchController),
-                ),
-                SizedBox(width: 5.w),
-                Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
-                  child: IconButton(
-                    iconSize: 20.h,
-                    splashRadius: 5,
-                    color: AppColors.primary,
-                    splashColor: AppColors.white,
-                    style: IconButton.styleFrom(
-                      fixedSize: Size.fromHeight(45.h),
-                      backgroundColor: AppColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.w)
-                      ),
-                    ),
-                    onPressed: (){},
-                    icon: Icon(Iconsax.setting_5),
-                  ),
-                )
-              ],
-            )
+            child: searchAndFilter(controller: searchController, onFilterTap: (){})
           ),
         ],
       ),
