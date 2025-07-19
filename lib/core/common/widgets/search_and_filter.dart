@@ -15,8 +15,10 @@ Widget searchAndFilter({required TextEditingController controller, void Function
           controller: controller,
           decoration: InputDecoration(
             filled: true,
+            isDense: true,
             hintText: 'Search...',
             fillColor: AppColors.white,
+            contentPadding: EdgeInsets.all(10.h),
             prefixIcon: Icon(Iconsax.search_normal_1, color: AppColors.grey),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
@@ -34,12 +36,12 @@ Widget searchAndFilter({required TextEditingController controller, void Function
         flex: 2,
         fit: FlexFit.tight,
         child: IconButton(
-          iconSize: 20.h,
           splashRadius: 5,
           color: AppColors.primary,
           splashColor: AppColors.white,
           style: IconButton.styleFrom(
-            fixedSize: Size.fromHeight(45.h),
+            iconSize: 20.h,
+            padding: EdgeInsets.all(10.h),
             backgroundColor: AppColors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.w)
