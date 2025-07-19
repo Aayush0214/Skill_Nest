@@ -1,15 +1,16 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_nest/core/common/widgets/appbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/snackbar.dart';
 import 'package:skill_nest/core/common/widgets/dialog_box.dart';
-import 'package:skill_nest/core/common/widgets/custom_text.dart';
-import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/common/widgets/loading_dialog.dart';
-import 'package:skill_nest/features/authentication/presentation/screen/pages/login.dart';
 import 'package:skill_nest/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
+import 'package:skill_nest/features/authentication/presentation/screen/pages/login.dart';
+import 'package:skill_nest/features/profile/presentation/screen/widgets/option_tile.dart';
 import 'package:skill_nest/features/profile/presentation/screen/widgets/profile_header.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -31,16 +32,7 @@ class ProfilePage extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text('My Profile'),
-            backgroundColor: AppColors.primary,
-            titleTextStyle: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.white,
-            ),
-          ),
+          appBar: commonAppBar('My Profile'),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
@@ -116,35 +108,4 @@ class ProfilePage extends StatelessWidget {
       },
     );
   }
-}
-
-Widget optionListTile({
-  required String optionText,
-  Color? textColor = AppColors.black,
-  Color? bgColor = AppColors.primary,
-  required IconData optionIcon,
-  VoidCallback? onOptionTap,
-}) {
-  return ListTile(
-    onTap: onOptionTap,
-    tileColor: AppColors.white,
-    contentPadding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-    leading: Container(
-      width: 32.h,
-      height: 32.h,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(10.w),
-      ),
-      child: Icon(optionIcon, color: AppColors.white),
-    ),
-    title: customText(
-      textString: optionText,
-      fontWeight: FontWeight.w600,
-      textColor: textColor,
-      fontSize: 14.sp,
-    ),
-    trailing: Icon(Iconsax.arrow_right_3, color: textColor),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.h)),
-  );
 }
