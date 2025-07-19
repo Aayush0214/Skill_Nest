@@ -1,6 +1,6 @@
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/common/widgets/custom_text.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
