@@ -37,6 +37,7 @@ dependencies:
   fpdart: ^1.1.1
   iconsax: ^0.0.8
   flutter_bloc: ^9.1.1
+  video_player: ^2.10.0
   dots_indicator: ^4.0.1
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.1.1
