@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/appbar.dart';
-import 'package:skill_nest/core/common/widgets/course_tile.dart';
 import 'package:skill_nest/core/constants/constant_images.dart';
+import 'package:skill_nest/core/common/widgets/course_tile.dart';
 import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
-import 'package:skill_nest/features/course/presentation/pages/course_details.dart';
+import 'package:skill_nest/features/course_details/presentation/pages/course_details.dart';
+
+import '../../domain/models/course_models.dart';
+import '../../domain/models/video_models.dart';
+import '../../domain/repository/progress_repository.dart';
 
 class CoursePage extends StatelessWidget {
   const CoursePage({super.key});
@@ -32,11 +36,59 @@ class CoursePage extends StatelessWidget {
                   tutorName: 'Aayush Kushwaha',
                   subTitleMaxLine: 1,
                   rating: '4.1',
-                  onListTap: () => NavigationService.push(context, CourseDetails()),
+                  onListTap: () => NavigationService.push(
+                    context,
+                    CourseDetailPage(
+                      args: CourseDetailArgs(course: DummySources.demoCoursePreview, autoPlayPreview: true),
+                      progressRepo: InMemoryProgressRepo(),
+                    ),
+                  ),
                 ),
           ),
         ),
       ),
     );
   }
+}
+
+// Dummy sources
+class DummySources {
+  static final _s1080 = VideoSource(url: Uri.parse('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'), label: VideoQualityLabel.p1080, bitrateKbps: 4000);
+  static final _s720  = VideoSource(url: Uri.parse('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'), label: VideoQualityLabel.p720, bitrateKbps: 2500);
+  static final _s480  = VideoSource(url: Uri.parse('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'), label: VideoQualityLabel.p480, bitrateKbps: 1200);
+
+  static final demoCoursePreview = CourseDetailData(
+    id: 'c1',
+    title: 'Flutter From Scratch',
+    subtitle: 'Learn Flutter step by step',
+    description: 'A beginner friendly course... (preview mode).',
+    thumbnailUrl: 'https://via.placeholder.com/800x450.png?text=Flutter+Course',
+    previewSources: [_s720],
+    isPurchased: false,
+    lessons: [
+      Lesson(id: 'l1', title: 'Welcome', duration: const Duration(minutes: 2), sources: [_s720], isFreePreview: true),
+      Lesson(id: 'l2', title: 'Setup', duration: const Duration(minutes: 10), sources: [_s1080, _s720, _s480]),
+    ],
+    rating: 4.6,
+    ratingCount: 1250,
+    totalDuration: const Duration(hours: 5, minutes: 30),
+  );
+
+  static final demoCoursePurchased = CourseDetailData(
+    id: 'c1',
+    title: 'Flutter From Scratch',
+    subtitle: 'Learn Flutter step by step',
+    description: 'Full access version.',
+    thumbnailUrl: 'https://via.placeholder.com/800x450.png?text=Flutter+Course',
+    previewSources: [_s720],
+    isPurchased: true,
+    lessons: [
+      Lesson(id: 'l1', title: 'Welcome', duration: const Duration(minutes: 2), sources: [_s720], isFreePreview: true),
+      Lesson(id: 'l2', title: 'Setup', duration: const Duration(minutes: 10), sources: [_s1080, _s720, _s480]),
+      Lesson(id: 'l3', title: 'Widgets 101', duration: const Duration(minutes: 25), sources: [_s1080, _s720, _s480]),
+    ],
+    rating: 4.6,
+    ratingCount: 1250,
+    totalDuration: const Duration(hours: 5, minutes: 30),
+  );
 }
