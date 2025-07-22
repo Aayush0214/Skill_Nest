@@ -30,4 +30,5 @@ class ConstantImages {
 
   /// Dummy Profile Image
   static String profileImage = "https://randomuser.me/api/portraits/men/1.jpg";
+  static String profilePlaceholder = "assets/images/profile_placeholder.png";
 }
