@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/appbar.dart';
-import 'package:skill_nest/core/constants/constant_images.dart';
 import 'package:skill_nest/core/common/widgets/course_tile.dart';
+import 'package:skill_nest/core/common/widgets/dummy_course.dart';
+import 'package:skill_nest/features/course/domain/models/video_models.dart';
+import 'package:skill_nest/features/course/domain/models/course_models.dart';
 import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
 import 'package:skill_nest/features/course_details/presentation/pages/course_details.dart';
-
-import '../../domain/models/course_models.dart';
-import '../../domain/models/video_models.dart';
-import '../../domain/repository/progress_repository.dart';
 
 class CoursePage extends StatelessWidget {
   const CoursePage({super.key});
@@ -25,25 +23,21 @@ class CoursePage extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             separatorBuilder: (context, index) => SizedBox(height: 8.h),
-            itemBuilder:
-                (context, index) => courseList(
-                  courseTitle: 'Flutter Firebase combined course',
-                  subTitle:
-                      'Flutter Firebase combined course Flutter Firebase combined course',
-                  courseImage: ConstantImages.course,
-                  coursePrice: '549₹',
-                  tutorImage: ConstantImages.profileImage,
-                  tutorName: 'Aayush Kushwaha',
-                  subTitleMaxLine: 1,
-                  rating: '4.1',
-                  onListTap: () => NavigationService.push(
-                    context,
-                    CourseDetailPage(
-                      args: CourseDetailArgs(course: DummySources.demoCoursePreview, autoPlayPreview: true),
-                      progressRepo: InMemoryProgressRepo(),
-                    ),
-                  ),
-                ),
+            itemBuilder:(context, index) {
+              final course = dummyCourses[index];
+              return courseList(
+                showPrice: false,
+                subTitleMaxLine: 2,
+                rating: course.rating,
+                courseTitle: course.title,
+                subTitle: course.description,
+                courseImage: course.thumbnail,
+                tutorName: course.instructor.name,
+                tutorImage: course.instructor.profileImage,
+                coursePrice: '₹ ${course.coursePrice.toStringAsFixed(1)}',
+                onListTap: () => NavigationService.push(context, CourseDetailPage(courseModel: course)),
+              );
+            }
           ),
         ),
       ),
