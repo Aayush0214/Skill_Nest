@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skill_nest/core/common/widgets/container.dart';
-import 'package:skill_nest/core/constants/constant_images.dart';
-import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
+import 'package:skill_nest/core/common/widgets/custom_text.dart';
+import 'package:skill_nest/core/common/widgets/common_thumbnail.dart';
 import 'package:skill_nest/features/home/domain/entity/dummy_entity.dart';
+import 'package:skill_nest/core/services/navigation_service/navigation_service.dart';
+import 'package:skill_nest/features/course_details/presentation/pages/course_details.dart';
 
-Widget courses({required List<Course> filteredCourses}) {
+Widget courses({required List<CourseModel> filteredCourses}) {
   return SliverPadding(
     padding: EdgeInsets.fromLTRB(5.w, 1.h, 5.w, 8.h),
     sliver: SliverGrid(
@@ -13,48 +15,67 @@ Widget courses({required List<Course> filteredCourses}) {
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        childAspectRatio: 1.07,
+        childAspectRatio: 0.78,
       ),
-      delegate: SliverChildBuilderDelegate(childCount: filteredCourses.length, (
-        context,
-        index,
-      ) {
-        final course =
-            filteredCourses[index]; // Assuming you have this in your state
-        return GestureDetector(
-          onTap: () {},
-          child: commonContainer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadiusDirectional.circular(10.w),
-                  child: Image.asset(
-                    height: 90.h,
-                    fit: BoxFit.fill,
-                    ConstantImages.course,
-                    width: double.infinity,
+      delegate: SliverChildBuilderDelegate(
+          childCount: filteredCourses.length,
+          (context,index) {
+            final course = filteredCourses[index];
+            return Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => NavigationService.push(context, CourseDetailPage(courseModel: course)),
+                splashColor: Colors.blue.withAlpha(60),
+                highlightColor: Colors.blue.withAlpha(40),
+                borderRadius: BorderRadius.circular(10.w),
+                child: commonContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      commonThumbnailImage(clipRadius: 10.w, thumbnailUrl: course.thumbnail, imageHeight: 90.h),
+                      SizedBox(height: 5.h),
+                      customText(
+                        maxLines: 2,
+                        fontSize: 14.sp,
+                        textString: course.title,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(height: 5.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: customText(
+                              fontWeight: FontWeight.normal,
+                              textString: course.instructor.name,
+                            ),
+                          ),
+                          SizedBox(width: 2.w),
+                          Icon(Icons.star, color: Colors.orange),
+                          SizedBox(width: 2.w),
+                          customText(
+                            fontWeight: FontWeight.normal,
+                            textString: course.rating.toStringAsFixed(1),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.h),
+                      customText(
+                        maxLines: 1,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        textString: '₹ ${course.coursePrice.toStringAsFixed(1)}',
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(height: 5.h),
-                Expanded(
-                  child: Text(
-                    maxLines: 2,
-                    course.title,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black.withAlpha(180),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      }),
+              ),
+            );
+          }
+      ),
     ),
   );
 }
+
+

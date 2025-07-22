@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _currentCarouselPosition = 0;
   var _selectedFilter = CourseFilterType.all;
-  List<Course> _filteredCourses = [];
+  List<CourseModel> _filteredCourses = [];
   final TextEditingController _searchController = TextEditingController();
   final List<String> _bannerImages = [
     ConstantImages.banner_1,

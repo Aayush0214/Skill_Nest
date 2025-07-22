@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skill_nest/core/common/widgets/custom_text.dart';
 import 'package:skill_nest/core/theme/app_colors/app_colors.dart';
 import 'package:skill_nest/core/common/widgets/search_and_filter.dart';
 
@@ -25,8 +26,18 @@ Widget homeHeader({required String userName, required String userProfileImage, r
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            greetingText('Hi, $userName 🖐️', 28.sp, FontWeight.w800),
-            greetingText("Let's start learning today!", 16.sp, FontWeight.normal),
+            customText(
+              fontSize: 28.sp,
+              textColor: AppColors.white,
+              fontWeight: FontWeight.w800,
+              textString: 'Hi, $userName 🖐️',
+            ),
+            customText(
+              fontSize: 16.sp,
+              textColor: AppColors.white,
+              fontWeight: FontWeight.normal,
+              textString: "Let's start learning today!",
+            ),
           ],
         ),
         CircleAvatar(
@@ -48,20 +59,6 @@ Widget homeHeader({required String userName, required String userProfileImage, r
           ),
         ],
       ),
-    ),
-  );
-}
-
-Widget greetingText(String text, double fontSize, FontWeight fontWeight) {
-  return Text(
-    text,
-    maxLines: 1,
-    softWrap: true,
-    textAlign: TextAlign.start,
-    style: TextStyle(
-      color: AppColors.white,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
     ),
   );
 }
