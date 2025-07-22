@@ -61,7 +61,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         debugPrint('email not verified');
         emit(NavigateToVerifyEmailState());
       } else {
-        debugPrint('dashboard');
         emit(NavigateToDashboardState());
       }
     }
