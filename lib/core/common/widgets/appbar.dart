@@ -9,7 +9,7 @@ PreferredSizeWidget commonAppBar(String title) {
     title: Text(
       title,
       style: TextStyle(
-        fontSize: 16.sp,
+        fontSize: 18.sp,
         fontWeight: FontWeight.w600,
         color: AppColors.white,
       ),
